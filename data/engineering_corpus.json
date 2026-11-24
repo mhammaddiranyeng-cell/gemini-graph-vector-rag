@@ -1,0 +1,16 @@
+{
+  "documents": [
+    {"doc_id": "DOC-01", "title": "Edge Telemetry Gateway Failover", "text": "Gateway GW-ZAHLE-01 aggregates Modbus TCP frames from Delta DVP-14SS2 PLCs and forwards MQTT payloads over TLS 1.3. When primary fiber link FIB-BEKAA-NORTH exceeds 15% packet loss, watchdog daemon net-guard triggers BGP failover to LTE modem MDM-77."},
+    {"doc_id": "DOC-02", "title": "Solar MPPT & LiFePO4 Power Bus", "text": "Remote station POP-CHTOURA-02 runs on a 24V LiFePO4 battery bank charged by Victron SmartSolar MPPT 100/50. If bus voltage drops below 22.4V, load-shedding relay K3 disconnects auxiliary PoE cameras while preserving Gateway GW-ZAHLE-01 and MDM-77."},
+    {"doc_id": "DOC-03", "title": "YOLOv8 Conveyor Vision Node", "text": "Raspberry Pi 4 node RPI4-SORT-01 executes quantized INT8 YOLOv8n inference at 28 FPS and sends RS-485 actuation pulses to Delta DVP-14SS2 register D100 to drive stepper gate DRV-TB6600."}
+  ],
+  "triples": [
+    {"head": "Gateway GW-ZAHLE-01", "relation": "POLLS_VIA_MODBUS", "tail": "Delta DVP-14SS2", "doc_id": "DOC-01"},
+    {"head": "Gateway GW-ZAHLE-01", "relation": "FAILS_OVER_TO", "tail": "LTE modem MDM-77", "doc_id": "DOC-01"},
+    {"head": "FIB-BEKAA-NORTH", "relation": "TRIGGERS_FAILOVER_ON", "tail": "Gateway GW-ZAHLE-01", "doc_id": "DOC-01"},
+    {"head": "Victron SmartSolar MPPT", "relation": "POWERS", "tail": "Gateway GW-ZAHLE-01", "doc_id": "DOC-02"},
+    {"head": "Load-shedding relay K3", "relation": "PROTECTS", "tail": "LTE modem MDM-77", "doc_id": "DOC-02"},
+    {"head": "RPI4-SORT-01", "relation": "WRITES_REGISTER_D100", "tail": "Delta DVP-14SS2", "doc_id": "DOC-03"},
+    {"head": "Delta DVP-14SS2", "relation": "ACTUATES", "tail": "Stepper gate DRV-TB6600", "doc_id": "DOC-03"}
+  ]
+}
